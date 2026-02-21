@@ -14,6 +14,11 @@
     .sec{border-radius:1rem;border:1px solid;padding:1.5rem}
     .sec-light{border-color:rgb(226 232 240);background:white}
     .dark .sec-light{border-color:rgb(51 65 85/.5);background:rgb(30 41 59/.4)}
+    .lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);align-items:center;justify-content:center;cursor:zoom-out}
+    .lightbox.active{display:flex}
+    .lightbox img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:.5rem}
+    .lightbox-close{position:absolute;top:1rem;right:1.5rem;color:#fff;font-size:2rem;cursor:pointer;width:2.5rem;height:2.5rem;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.1);border:none;transition:background .2s}
+    .lightbox-close:hover{background:rgba(255,255,255,.25)}
   </style>
 </head>
 <body class="bg-surface-50 text-slate-900 dark:bg-surface-950 dark:text-slate-100 font-sans grid-bg">
@@ -73,5 +78,6 @@
     </div>
   </main>
   <footer class="border-t border-slate-200 dark:border-slate-800 py-6"><div class="mx-auto max-w-5xl px-6 flex items-center justify-between"><small class="text-sm text-slate-400">&#169; <span id="year"></span> David Nduwa</small><small class="text-xs text-slate-400">Simulated lab environment. No production data exposed.</small></div></footer>
-  <script>document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('themeToggle').addEventListener('click',function(){var d=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',d?'dark':'light')});</script>
+  <div id="lightbox" class="lightbox" onclick="this.classList.remove('active')"><button class="lightbox-close" aria-label="Close">&times;</button><img id="lightbox-img" src="" alt="" /></div>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('themeToggle').addEventListener('click',function(){var d=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',d?'dark':'light')});document.querySelectorAll('main img').forEach(function(img){img.style.cursor='zoom-in';img.addEventListener('click',function(){document.getElementById('lightbox-img').src=this.src;document.getElementById('lightbox-img').alt=this.alt;document.getElementById('lightbox').classList.add('active')})});document.addEventListener('keydown',function(e){if(e.key==='Escape')document.getElementById('lightbox').classList.remove('active')});</script>
 </body></html>
