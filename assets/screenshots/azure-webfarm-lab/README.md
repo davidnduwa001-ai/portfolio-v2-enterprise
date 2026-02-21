@@ -1,0 +1,1 @@
+Place diagrams/screens here (e.g., architecture PNG exported from README Mermaid if needed).

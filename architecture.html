@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Architecture Overview — David Nduwa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/f20d1214f6.js" crossorigin="anonymous"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Instrument Sans','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{brand:{500:'#3b82f6',600:'#2563eb'},surface:{50:'#f8fafc',950:'#020617'}},boxShadow:{soft:'0 10px 30px rgba(2,6,23,.08)',glow:'0 0 40px rgba(59,130,246,.15)'}}}};if((localStorage.getItem('theme')||'dark')==='dark')document.documentElement.classList.add('dark');</script>
+  <style>.tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.05em;text-transform:uppercase}.grid-bg{background-size:60px 60px;background-image:linear-gradient(to right,rgba(148,163,184,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(148,163,184,.05) 1px,transparent 1px)}.layer{border-radius:1rem;padding:2rem;position:relative;overflow:hidden}.flow-arrow{color:rgb(148 163 184/.4);font-size:2rem;text-align:center}</style>
+</head>
+<body class="bg-surface-50 text-slate-900 dark:bg-surface-950 dark:text-slate-100 font-sans grid-bg">
+  <nav class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#020617]/80 backdrop-blur-xl"><div class="mx-auto max-w-5xl px-6 py-3 flex items-center justify-between"><a href="index.html" class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-blue-500 transition"><i class="fa-solid fa-arrow-left text-xs"></i> Home</a><button id="themeToggle" class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition">&#x1F313;</button></div></nav>
+
+  <header class="py-16"><div class="mx-auto max-w-5xl px-6">
+    <span class="tag px-2.5 py-1 rounded-md bg-brand-50 dark:bg-brand-500/10 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-500/20">Master View</span>
+    <h1 class="mt-4 text-4xl font-bold tracking-tight">Portfolio Architecture Overview</h1>
+    <p class="mt-3 text-lg text-slate-500 dark:text-slate-400">How Governance, Networking, Monitoring, and Resilience connect.</p>
+  </div></header>
+
+  <main class="mx-auto max-w-5xl px-6 pb-20 space-y-4">
+
+    <!-- Layer 1 -->
+    <div class="layer border border-amber-200 dark:border-amber-500/30 bg-amber-50/50 dark:bg-amber-500/5">
+      <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#f59e0b,#f97316)"></div>
+      <div class="flex items-start gap-4">
+        <div class="w-14 h-14 rounded-xl bg-amber-100 dark:bg-amber-500/20 flex items-center justify-center shrink-0"><i class="fa-solid fa-shield-halved text-2xl text-amber-600 dark:text-amber-400"></i></div>
+        <div class="flex-1">
+          <h2 class="text-xl font-bold">Layer 1: Governance &amp; Cost Control</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Foundation &#8212; must exist before any workload deployment.</p>
+          <div class="mt-4 grid sm:grid-cols-3 gap-3">
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-amber-200/50 dark:border-amber-500/20 p-3"><p class="font-semibold text-sm">Azure Budgets</p><p class="text-xs text-slate-400">70% + 100% alerts</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-amber-200/50 dark:border-amber-500/20 p-3"><p class="font-semibold text-sm">Azure Policy</p><p class="text-xs text-slate-400">5+ policies enforced</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-amber-200/50 dark:border-amber-500/20 p-3"><p class="font-semibold text-sm">RBAC</p><p class="text-xs text-slate-400">Owner, Reader, Custom</p></div>
+          </div>
+          <a href="projects/governance-cost-guardrails.html" class="mt-3 inline-block font-mono text-xs text-amber-600 dark:text-amber-400 hover:underline">View case study &#8594;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">&#8595;</div>
+
+    <!-- Layer 2 -->
+    <div class="layer border border-rose-200 dark:border-rose-500/30 bg-rose-50/50 dark:bg-rose-500/5">
+      <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#f43f5e,#ef4444)"></div>
+      <div class="flex items-start gap-4">
+        <div class="w-14 h-14 rounded-xl bg-rose-100 dark:bg-rose-500/20 flex items-center justify-center shrink-0"><i class="fa-solid fa-fire text-2xl text-rose-600 dark:text-rose-400"></i></div>
+        <div class="flex-1">
+          <h2 class="text-xl font-bold">Layer 2: Network Security &amp; Routing</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400">100% outbound traffic through centralized inspection.</p>
+          <div class="mt-4 grid sm:grid-cols-4 gap-3">
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-rose-200/50 dark:border-rose-500/20 p-3"><p class="font-semibold text-sm">Hub VNet</p><p class="text-xs text-slate-400">10.0.0.0/16</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-rose-200/50 dark:border-rose-500/20 p-3"><p class="font-semibold text-sm">Spoke A</p><p class="text-xs text-slate-400">10.1.0.0/16</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-rose-200/50 dark:border-rose-500/20 p-3"><p class="font-semibold text-sm">Spoke B</p><p class="text-xs text-slate-400">10.2.0.0/16</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-rose-200/50 dark:border-rose-500/20 p-3"><p class="font-semibold text-sm">Firewall</p><p class="text-xs text-slate-400">UDR 0.0.0.0/0</p></div>
+          </div>
+          <div class="mt-3 flex gap-4">
+            <a href="projects/hub-spoke-firewall.html" class="font-mono text-xs text-rose-600 dark:text-rose-400 hover:underline">Hub-Spoke &#8594;</a>
+            <a href="projects/network-security.html" class="font-mono text-xs text-rose-600 dark:text-rose-400 hover:underline">NSG &amp; DNS &#8594;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">&#8595;</div>
+
+    <!-- Layer 3 -->
+    <div class="layer border border-purple-200 dark:border-purple-500/30 bg-purple-50/50 dark:bg-purple-500/5">
+      <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#a855f7,#7c3aed)"></div>
+      <div class="flex items-start gap-4">
+        <div class="w-14 h-14 rounded-xl bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center shrink-0"><i class="fa-solid fa-chart-line text-2xl text-purple-600 dark:text-purple-400"></i></div>
+        <div class="flex-1">
+          <h2 class="text-xl font-bold">Layer 3: Monitoring &amp; Observability</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400">Every resource reports to Log Analytics. KQL-powered analysis.</p>
+          <div class="mt-4 grid sm:grid-cols-3 gap-3">
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-purple-200/50 dark:border-purple-500/20 p-3"><p class="font-semibold text-sm">Log Analytics</p><p class="text-xs text-slate-400">Central workspace</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-purple-200/50 dark:border-purple-500/20 p-3"><p class="font-semibold text-sm">4 KQL Queries</p><p class="text-xs text-slate-400">Reusable monitoring</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-purple-200/50 dark:border-purple-500/20 p-3"><p class="font-semibold text-sm">Diagnostics</p><p class="text-xs text-slate-400">NSG, Storage, FW</p></div>
+          </div>
+          <a href="projects/monitoring-log-analytics.html" class="mt-3 inline-block font-mono text-xs text-purple-600 dark:text-purple-400 hover:underline">View case study &#8594;</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow">&#8595;</div>
+
+    <!-- Layer 4 -->
+    <div class="layer border border-emerald-200 dark:border-emerald-500/30 bg-emerald-50/50 dark:bg-emerald-500/5">
+      <div style="position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#10b981,#14b8a6)"></div>
+      <div class="flex items-start gap-4">
+        <div class="w-14 h-14 rounded-xl bg-emerald-100 dark:bg-emerald-500/20 flex items-center justify-center shrink-0"><i class="fa-solid fa-rotate text-2xl text-emerald-600 dark:text-emerald-400"></i></div>
+        <div class="flex-1">
+          <h2 class="text-xl font-bold">Layer 4: Resilience &amp; Disaster Recovery</h2>
+          <p class="text-sm text-slate-500 dark:text-slate-400">3-tier backup retention. Cross-region failover tested. Zero downtime.</p>
+          <div class="mt-4 grid sm:grid-cols-3 gap-3">
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-emerald-200/50 dark:border-emerald-500/20 p-3"><p class="font-semibold text-sm">7-day Snapshots</p><p class="text-xs text-slate-400">Instant recovery</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-emerald-200/50 dark:border-emerald-500/20 p-3"><p class="font-semibold text-sm">30-day Daily</p><p class="text-xs text-slate-400">Standard retention</p></div>
+            <div class="rounded-lg bg-white/80 dark:bg-slate-800/60 border border-emerald-200/50 dark:border-emerald-500/20 p-3"><p class="font-semibold text-sm">6-month LTR</p><p class="text-xs text-slate-400">Compliance ready</p></div>
+          </div>
+          <a href="projects/resilience-backup-dr.html" class="mt-3 inline-block font-mono text-xs text-emerald-600 dark:text-emerald-400 hover:underline">View case study &#8594;</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Key Insight -->
+    <div class="mt-8 rounded-2xl border border-slate-200 dark:border-slate-700/50 bg-white dark:bg-slate-800/40 p-8 shadow-soft text-center">
+      <p class="text-lg font-semibold">Governance &#8594; Networking &#8594; Monitoring &#8594; Resilience</p>
+      <p class="mt-2 text-slate-500 dark:text-slate-400 max-w-2xl mx-auto">Each layer builds on the previous. Skip governance and networking breaks. Skip monitoring and incidents go undetected. Skip resilience and recovery becomes impossible.</p>
+      <a href="index.html#case-studies" class="mt-6 inline-block px-6 py-3 font-semibold rounded-xl bg-brand-600 text-white hover:bg-brand-700 transition shadow-glow">Explore Each Layer</a>
+    </div>
+  </main>
+
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-6"><div class="mx-auto max-w-5xl px-6 flex items-center justify-between"><small class="text-sm text-slate-400">&#169; <span id="year"></span> David Nduwa</small><small class="text-xs text-slate-400">Simulated lab. No production data exposed.</small></div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('themeToggle').addEventListener('click',function(){var d=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',d?'dark':'light')});</script>
+</body>
+</html>

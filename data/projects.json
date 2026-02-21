@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Azure Landing Zone",
+    "description": "Governance, RBAC, budgets, and cost controls.",
+    "stack": "Azure, Policy, RBAC",
+    "tags": [
+      "Azure",
+      "Security"
+    ],
+    "link": "projects/azure-landing-zone.html"
+  },
+  {
+    "title": "Terraform Modules",
+    "description": "Reusable modules for VNet, AKS, and Key Vault.",
+    "stack": "Terraform, AzureRM, GitHub Actions",
+    "tags": [
+      "Terraform"
+    ],
+    "link": "projects/terraform-modules.html"
+  },
+  {
+    "title": "AKS Microservices",
+    "description": "Autoscaling microservices with HPA and ingress TLS.",
+    "stack": "AKS, Helm, HPA, Ingress",
+    "tags": [
+      "Kubernetes"
+    ],
+    "link": "projects/aks-microservices.html"
+  }
+]

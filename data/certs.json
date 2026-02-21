@@ -1,0 +1,32 @@
+[
+  {
+    "name": "AZ-900 (Azure Fundamentals)",
+    "status": "Completed",
+    "date": "2025-10-02"
+  },
+  {
+    "name": "AZ-104 (Azure Administrator)",
+    "status": "In Progress",
+    "date": "2026-01-31"
+  },
+  {
+    "name": "Terraform Associate",
+    "status": "Planned",
+    "date": "2026-04-30"
+  },
+  {
+    "name": "CKAD (Kubernetes)",
+    "status": "Planned",
+    "date": "2026-06-30"
+  },
+  {
+    "name": "AZ-305 (Solutions Architect)",
+    "status": "Planned",
+    "date": "2027-04-30"
+  },
+  {
+    "name": "AZ-500 (Security Engineer)",
+    "status": "Planned",
+    "date": "2027-08-31"
+  }
+]

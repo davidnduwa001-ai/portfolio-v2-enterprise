@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Governance &amp; Cost Guardrails — David Nduwa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/f20d1214f6.js" crossorigin="anonymous"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Instrument Sans','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{brand:{400:'#60a5fa',500:'#3b82f6',600:'#2563eb'},surface:{50:'#f8fafc',950:'#020617'}},boxShadow:{soft:'0 10px 30px rgba(2,6,23,.08)',glow:'0 0 40px rgba(59,130,246,.15)'}}}};if((localStorage.getItem('theme')||'dark')==='dark')document.documentElement.classList.add('dark');</script>
+  <style>
+    .tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.05em;text-transform:uppercase}
+    .grid-bg{background-size:60px 60px;background-image:linear-gradient(to right,rgba(148,163,184,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(148,163,184,.05) 1px,transparent 1px)}
+    .sec{border-radius:1rem;border:1px solid;padding:1.5rem}
+    .sec-light{border-color:rgb(226 232 240);background:white}
+    .dark .sec-light{border-color:rgb(51 65 85/.5);background:rgb(30 41 59/.4)}
+  </style>
+</head>
+<body class="bg-surface-50 text-slate-900 dark:bg-surface-950 dark:text-slate-100 font-sans grid-bg">
+  <nav class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#020617]/80 backdrop-blur-xl">
+    <div class="mx-auto max-w-5xl px-6 py-3 flex items-center justify-between">
+      <a href="../index.html#case-studies" class="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-blue-500 transition"><i class="fa-solid fa-arrow-left text-xs"></i> Back to Case Studies</a>
+      <button id="themeToggle" class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm">&#x1F313;</button>
+    </div>
+  </nav>
+  <header class="relative overflow-hidden py-16">
+    <div class="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[100px]"></div>
+    <div class="relative mx-auto max-w-5xl px-6">
+      <div class="flex flex-wrap gap-2 mb-4"><span class="tag px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20">Governance</span> <span class="tag px-2.5 py-1 rounded-md bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-500/20">Policy</span> <span class="tag px-2.5 py-1 rounded-md bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-100 dark:border-purple-500/20">RBAC</span></div>
+      <h1 class="text-4xl font-bold tracking-tight">Governance &amp; Cost Guardrails</h1>
+      <p class="mt-3 text-lg text-slate-500 dark:text-slate-400">Subscription-level governance baseline with budget monitoring, policy enforcement, and RBAC separation.</p>
+    </div>
+  </header>
+  <main class="mx-auto max-w-5xl px-6 pb-20 space-y-6">
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-500/10 flex items-center justify-center"><i class="fa-solid fa-circle-exclamation text-rose-500 text-sm"></i></div><h2 class="text-xl font-semibold">Problem</h2></div>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Uncontrolled Azure environments risk overspend, resource sprawl, and privilege escalation. Without early guardrails, costs spiral and security posture degrades before the team notices.</p>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center"><i class="fa-solid fa-diagram-project text-blue-500 text-sm"></i></div><h2 class="text-xl font-semibold">Architecture</h2></div>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Subscription-level governance baseline with budget monitoring at multiple thresholds, Azure Policy enforcement for region and tag compliance, and RBAC separation between admin, finance, and operational roles.</p><div class="grid gap-4 sm:grid-cols-2 mt-4"><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/budget-&-guardrails-project/assigned policy.png" alt="Assigned Policy" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Assigned Policy</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/budget-&-guardrails-project/assignrrole.png" alt="Assignrrole" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Assignrrole</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/budget-&-guardrails-project/details_budget_spending.png" alt="Details Budget Spending" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Details Budget Spending</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/budget-&-guardrails-project/sub IAM.png" alt="Sub Iam" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Sub Iam</p></div></div>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center"><i class="fa-solid fa-wrench text-emerald-500 text-sm"></i></div><h2 class="text-xl font-semibold">Implementation</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>Monthly budget configured at $20 with 70% and 100% alert thresholds</li><li>Azure Policy: Allowed Regions (East US, West US)</li><li>Azure Policy: Required tags (owner, costCenter)</li><li>Azure Policy: Deny public IPs on NICs</li><li>RBAC roles: Owner, Reader, Custom Tag Contributor</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-500/10 flex items-center justify-center"><i class="fa-solid fa-flask text-purple-500 text-sm"></i></div><h2 class="text-xl font-semibold">Validation</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>Policy compliance dashboard confirmed enforcement</li><li>Deny effect blocked out-of-region deployment attempts</li><li>Budget alerts triggered during simulated overuse</li><li>Tag-only custom role verified: can tag but cannot delete</li></ul><div class="grid gap-4 sm:grid-cols-2 mt-4"><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/budget-&-guardrails-project/netowrk denied.png" alt="Netowrk Denied" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Netowrk Denied</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/budget-&-guardrails-project/requires tags.png" alt="Requires Tags" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Requires Tags</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/budget-&-guardrails-project/policy page details .png" alt="Policy Page Details" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Policy Page Details</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/budget-&-guardrails-project/list.png" alt="List" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">List</p></div></div>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center"><i class="fa-solid fa-chart-bar text-amber-500 text-sm"></i></div><h2 class="text-xl font-semibold">Quantified Outcomes</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>Prevented 100% of out-of-region deployments in test environment</li><li>Achieved 100% tag compliance across all resources</li><li>Established cost alert visibility within 1 billing cycle</li><li>RBAC validated across 3 role assignments</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-red-50 dark:bg-red-500/10 flex items-center justify-center"><i class="fa-solid fa-bug text-red-500 text-sm"></i></div><h2 class="text-xl font-semibold">Failure Scenarios Tested</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>Attempted out-of-region deployment &#8594; Policy Deny triggered</li><li>Created resource without required tags &#8594; deployment blocked</li><li>Assigned Tag Contributor role &#8594; confirmed cannot delete resources</li><li>Simulated overspend &#8594; budget alert email received</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-slate-50 dark:bg-slate-500/10 flex items-center justify-center"><i class="fa-solid fa-gears text-slate-500 text-sm"></i></div><h2 class="text-xl font-semibold">Operational Considerations</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>In production: apply Policy initiatives at Management Group scope, not subscription</li><li>Add Azure Cost Management exports to storage for long-term trend analysis</li><li>Implement Policy exemptions process for legitimate exceptions</li><li>Add automated remediation tasks for non-compliant resources</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-cyan-50 dark:bg-cyan-500/10 flex items-center justify-center"><i class="fa-solid fa-lightbulb text-cyan-500 text-sm"></i></div><h2 class="text-xl font-semibold">Lessons Learned</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>Governance must come before workload deployment, not after</li><li>Tag enforcement at deployment time is far more effective than retroactive tagging</li><li>Custom RBAC roles enable least-privilege without blocking legitimate work</li><li>Budget alerts are only useful if action owners are clearly defined</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center"><i class="fa-solid fa-building text-emerald-500 text-sm"></i></div><h2 class="text-xl font-semibold">Business Impact</h2></div>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Reduced financial risk and improved governance control before scaling. Established a repeatable governance baseline that can be applied to any new subscription or management group.</p>
+    </section>
+    <div class="flex flex-wrap gap-3 pt-4">
+      <a href="../index.html#case-studies" class="px-5 py-2.5 font-medium rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition inline-flex items-center gap-2"><i class="fa-solid fa-arrow-left text-xs"></i> All Case Studies</a>
+    </div>
+  </main>
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-6"><div class="mx-auto max-w-5xl px-6 flex items-center justify-between"><small class="text-sm text-slate-400">&#169; <span id="year"></span> David Nduwa</small><small class="text-xs text-slate-400">Simulated lab environment. No production data exposed.</small></div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('themeToggle').addEventListener('click',function(){var d=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',d?'dark':'light')});</script>
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resilience Stack: Backup &amp; Disaster Recovery — David Nduwa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/f20d1214f6.js" crossorigin="anonymous"></script>
+  <script>tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{sans:['Instrument Sans','sans-serif'],mono:['JetBrains Mono','monospace']},colors:{brand:{400:'#60a5fa',500:'#3b82f6',600:'#2563eb'},surface:{50:'#f8fafc',950:'#020617'}},boxShadow:{soft:'0 10px 30px rgba(2,6,23,.08)',glow:'0 0 40px rgba(59,130,246,.15)'}}}};if((localStorage.getItem('theme')||'dark')==='dark')document.documentElement.classList.add('dark');</script>
+  <style>
+    .tag{font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.05em;text-transform:uppercase}
+    .grid-bg{background-size:60px 60px;background-image:linear-gradient(to right,rgba(148,163,184,.05) 1px,transparent 1px),linear-gradient(to bottom,rgba(148,163,184,.05) 1px,transparent 1px)}
+    .sec{border-radius:1rem;border:1px solid;padding:1.5rem}
+    .sec-light{border-color:rgb(226 232 240);background:white}
+    .dark .sec-light{border-color:rgb(51 65 85/.5);background:rgb(30 41 59/.4)}
+  </style>
+</head>
+<body class="bg-surface-50 text-slate-900 dark:bg-surface-950 dark:text-slate-100 font-sans grid-bg">
+  <nav class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#020617]/80 backdrop-blur-xl">
+    <div class="mx-auto max-w-5xl px-6 py-3 flex items-center justify-between">
+      <a href="../index.html#case-studies" class="inline-flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-blue-500 transition"><i class="fa-solid fa-arrow-left text-xs"></i> Back to Case Studies</a>
+      <button id="themeToggle" class="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-sm">&#x1F313;</button>
+    </div>
+  </nav>
+  <header class="relative overflow-hidden py-16">
+    <div class="absolute top-[-20%] left-[-10%] w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[100px]"></div>
+    <div class="relative mx-auto max-w-5xl px-6">
+      <div class="flex flex-wrap gap-2 mb-4"><span class="tag px-2.5 py-1 rounded-md bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-100 dark:border-amber-500/20">Backup</span> <span class="tag px-2.5 py-1 rounded-md bg-rose-50 dark:bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-100 dark:border-rose-500/20">DR</span> <span class="tag px-2.5 py-1 rounded-md bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-500/20">Resilience</span></div>
+      <h1 class="text-4xl font-bold tracking-tight">Resilience Stack: Backup &amp; Disaster Recovery</h1>
+      <p class="mt-3 text-lg text-slate-500 dark:text-slate-400">Recovery Services Vault with 3-tier retention, cross-region failover testing, and soft-delete protection.</p>
+    </div>
+  </header>
+  <main class="mx-auto max-w-5xl px-6 pb-20 space-y-6">
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-rose-50 dark:bg-rose-500/10 flex items-center justify-center"><i class="fa-solid fa-circle-exclamation text-rose-500 text-sm"></i></div><h2 class="text-xl font-semibold">Problem</h2></div>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Without proper backup and disaster recovery, a regional outage or accidental deletion means permanent data loss. Most organizations discover their DR gaps only during an actual incident.</p>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-500/10 flex items-center justify-center"><i class="fa-solid fa-diagram-project text-blue-500 text-sm"></i></div><h2 class="text-xl font-semibold">Architecture</h2></div>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Recovery Services Vault in primary region (East US) with tiered backup policies. Cross-region restore validation to West US. Soft-delete and purge protection enabled for defense-in-depth against accidental or malicious deletion.</p><div class="grid gap-4 sm:grid-cols-2 mt-4"><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/recovery-services-vault/diagram.png" alt="Diagram" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Diagram</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/recovery-services-vault/rsv overview.png" alt="Rsv Overview" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Rsv Overview</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/recovery-services-vault/cm-backup-east1.png" alt="Cm Backup East1" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Cm Backup East1</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/recovery-services-vault/vm-backup-westus.png" alt="Vm Backup Westus" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Vm Backup Westus</p></div></div>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center"><i class="fa-solid fa-wrench text-emerald-500 text-sm"></i></div><h2 class="text-xl font-semibold">Implementation</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>Recovery Services Vault deployed with cross-region configuration</li><li>VM backup policies with scheduled protection</li><li>7-day instant snapshot retention</li><li>30-day daily backup retention</li><li>6-month long-term retention</li><li>Soft-delete enabled to prevent accidental permanent deletion</li><li>RBAC guardrails for backup operator roles</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-purple-50 dark:bg-purple-500/10 flex items-center justify-center"><i class="fa-solid fa-flask text-purple-500 text-sm"></i></div><h2 class="text-xl font-semibold">Validation</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>Backup jobs completing successfully and visible in vault</li><li>Cross-region limitation confirmed: East US backup not visible in West US vault</li><li>Soft-delete recovery: successfully restored a deleted backup item</li><li>RBAC validation: non-authorized user blocked from modifying policies</li><li>1 successful cross-region test failover completed</li></ul><div class="grid gap-4 sm:grid-cols-2 mt-4"><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/recovery-services-vault/rg overview cross region.png" alt="Rg Overview Cross Region" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Rg Overview Cross Region</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/recovery-services-vault/backup deleted.png" alt="Backup Deleted" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Backup Deleted</p></div><div class="rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50"><img src="../assets/screenshots/recovery-services-vault/backup in another region doesn't show.png" alt="Backup In Another Region Doesn'T Show" class="w-full h-48 object-cover" loading="lazy" /><p class="px-3 py-2 text-xs text-slate-500 font-mono">Backup In Another Region Doesn'T Show</p></div></div>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-500/10 flex items-center justify-center"><i class="fa-solid fa-chart-bar text-amber-500 text-sm"></i></div><h2 class="text-xl font-semibold">Quantified Outcomes</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>7-day instant snapshot retention configured</li><li>30-day daily backup retention validated</li><li>6-month long-term retention policy set</li><li>1 successful test failover completed</li><li>0 downtime during DR validation</li><li>Soft-delete verified enabled and functional</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-red-50 dark:bg-red-500/10 flex items-center justify-center"><i class="fa-solid fa-bug text-red-500 text-sm"></i></div><h2 class="text-xl font-semibold">Failure Scenarios Tested</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>Deleted backup item &#8594; soft-delete caught and allowed recovery</li><li>Attempted backup modification with Reader role &#8594; denied</li><li>Checked cross-region vault visibility &#8594; confirmed region-scoped limitation</li><li>Stopped source VM &#8594; verified backup still accessible from vault</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-slate-50 dark:bg-slate-500/10 flex items-center justify-center"><i class="fa-solid fa-gears text-slate-500 text-sm"></i></div><h2 class="text-xl font-semibold">Operational Considerations</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>In production: use Azure Site Recovery for full VM replication across regions</li><li>Implement automated DR runbooks with Azure Automation</li><li>Schedule quarterly DR drills with documented recovery time objectives</li><li>Configure backup alerts for failed jobs</li><li>Use Azure Policy to enforce backup on all production VMs</li><li>Consider immutable vault for ransomware protection</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-cyan-50 dark:bg-cyan-500/10 flex items-center justify-center"><i class="fa-solid fa-lightbulb text-cyan-500 text-sm"></i></div><h2 class="text-xl font-semibold">Lessons Learned</h2></div>
+      <ul class="space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed list-disc pl-5"><li>DR plans must be tested regularly &#8212; untested plans are not plans</li><li>Soft-delete is essential but purge protection adds the critical second layer</li><li>Cross-region backup requires explicit geo-redundancy configuration</li><li>Recovery time depends on backup type: snapshot (minutes) vs vault (hours)</li></ul>
+    </section>
+    <section class="sec sec-light shadow-soft">
+      <div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 flex items-center justify-center"><i class="fa-solid fa-building text-emerald-500 text-sm"></i></div><h2 class="text-xl font-semibold">Business Impact</h2></div>
+      <p class="text-slate-600 dark:text-slate-300 leading-relaxed">Demonstrated both short-term data recovery and cross-region disaster recovery readiness. Established a 3-tier retention strategy that balances cost with recovery flexibility.</p>
+    </section>
+    <div class="flex flex-wrap gap-3 pt-4">
+      <a href="../index.html#case-studies" class="px-5 py-2.5 font-medium rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition inline-flex items-center gap-2"><i class="fa-solid fa-arrow-left text-xs"></i> All Case Studies</a>
+    </div>
+  </main>
+  <footer class="border-t border-slate-200 dark:border-slate-800 py-6"><div class="mx-auto max-w-5xl px-6 flex items-center justify-between"><small class="text-sm text-slate-400">&#169; <span id="year"></span> David Nduwa</small><small class="text-xs text-slate-400">Simulated lab environment. No production data exposed.</small></div></footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('themeToggle').addEventListener('click',function(){var d=document.documentElement.classList.toggle('dark');localStorage.setItem('theme',d?'dark':'light')});</script>
+</body></html>

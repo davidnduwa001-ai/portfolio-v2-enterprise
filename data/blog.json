@@ -1,0 +1,12 @@
+[
+  {
+    "title": "How I Built My Azure Landing Zone",
+    "link": "blog/how-i-built-azure-landing-zone.html",
+    "date": "2025-10-10"
+  },
+  {
+    "title": "Terraform vs Azure Portal: My Tests",
+    "link": "blog/terraform-vs-portal.html",
+    "date": "2025-11-08"
+  }
+]

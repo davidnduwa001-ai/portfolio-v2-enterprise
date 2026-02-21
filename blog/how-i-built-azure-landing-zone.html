@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>How I Built My Azure Landing Zone (AZ-900)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["ui-sans-serif","system-ui","Segoe UI","Inter","Helvetica Neue","Arial","Noto Sans","Apple Color Emoji","Segoe UI Emoji"] },
+          colors: {
+            azure: {
+              50:"#f0f7ff", 100:"#e1effe", 200:"#c3ddfd", 300:"#9ec6fb",
+              400:"#77aaf7", 500:"#5a8ff0", 600:"#3f74e8", 700:"#2f59c4",
+              800:"#284aa0", 900:"#243f83"
+            }
+          },
+          keyframes: {
+            fadeUp: { "0%":{opacity:0, transform:"translateY(8px)"}, "100%":{opacity:1, transform:"translateY(0)"} },
+            pulseGlow: { "0%,100%":{boxShadow:"0 0 0 0 rgba(63,116,232,0.35)"}, "50%":{boxShadow:"0 0 0 12px rgba(63,116,232,0.0)"} }
+          },
+          animation: { fadeUp:"fadeUp .6s ease both", pulseGlow:"pulseGlow 3s ease-in-out infinite" }
+        }
+      },
+      darkMode: "class"
+    }
+  </script>
+  <style>
+    /* Light/Dark auto */
+    @media (prefers-color-scheme: dark) {
+      html { color-scheme: dark; }
+      body { background: #0b1020; }
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-white text-slate-800 antialiased md:bg-gradient-to-b md:from-azure-50 md:via-white md:to-white dark:text-slate-100">
+  <!-- Header / Hero -->
+  <header class="relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none blur-3xl opacity-40" aria-hidden="true">
+      <div class="h-64 w-64 bg-azure-400/30 rounded-full absolute -top-16 -left-10"></div>
+      <div class="h-64 w-64 bg-azure-700/30 rounded-full absolute -bottom-20 -right-10"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 pt-12 pb-8">
+      <div class="flex items-start gap-6">
+        <div class="hidden lg:block w-64 shrink-0"></div>
+        <div class="flex-1">
+          <span class="inline-flex items-center gap-2 rounded-full bg-azure-600/10 px-3 py-1 text-azure-700 dark:text-azure-300 ring-1 ring-azure-600/20 animate-pulseGlow">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M11.45 2.05a.75.75 0 0 1 1.1 0l2.1 2.32 3.1.68a.75.75 0 0 1 .41 1.22l-2.1 2.32.33 3.15a.75.75 0 0 1-1.06.77l-2.88-1.3-2.9 1.3a.75.75 0 0 1-1.05-.77l.32-3.15-2.08-2.32a.75.75 0 0 1 .41-1.22l3.1-.68 2.1-2.32Z"/></svg>
+            AZ-900 • PaaS • Governance • Monitoring
+          </span>
+          <h1 class="mt-4 text-4xl md:text-5xl font-bold tracking-tight bg-gradient-to-r from-azure-800 to-azure-500 bg-clip-text text-transparent">
+            How I Built My Azure Landing Zone
+          </h1>
+          <p class="mt-3 text-lg text-slate-600 dark:text-slate-300">
+            A lightweight, **Portal-only** mini build: App Service on Free tier, cost guardrails, and a simple availability alert exactly the AZ-900 fundamentals.
+          </p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <span class="px-3 py-1 rounded-full bg-slate-100 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:ring-slate-800">#Azure</span>
+            <span class="px-3 py-1 rounded-full bg-slate-100 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:ring-slate-800">#AZ900</span>
+            <span class="px-3 py-1 rounded-full bg-slate-100 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:ring-slate-800">#AppService</span>
+            <span class="px-3 py-1 rounded-full bg-slate-100 ring-1 ring-slate-200 dark:bg-slate-900/40 dark:ring-slate-800">#CostManagement</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="max-w-7xl mx-auto px-6 pb-16">
+    <div class="grid lg:grid-cols-[16rem_1fr] gap-8">
+      <!-- TOC -->
+      <aside class="hidden lg:block sticky top-6 self-start">
+        <nav class="rounded-xl border border-slate-200 bg-white/70 backdrop-blur dark:bg-slate-900/40 dark:border-slate-800 p-4">
+          <h2 class="text-sm font-semibold text-slate-500 dark:text-slate-400">On this page</h2>
+          <ol class="mt-3 space-y-2 text-sm">
+            <li><a href="#step-1" class="toc-link hover:text-azure-700">1. Resource Groups + tags</a></li>
+            <li><a href="#step-2" class="toc-link hover:text-azure-700">2. App Service (Free)</a></li>
+            <li><a href="#step-3" class="toc-link hover:text-azure-700">3. Deploy content</a></li>
+            <li><a href="#step-4" class="toc-link hover:text-azure-700">4. Azure Front Door (opt.)</a></li>
+            <li><a href="#step-5" class="toc-link hover:text-azure-700">5. Budget + email alerts</a></li>
+            <li><a href="#step-6" class="toc-link hover:text-azure-700">6. Availability alert (5xx)</a></li>
+            <li><a href="#step-7" class="toc-link hover:text-azure-700">7. Network skeleton (opt.)</a></li>
+          </ol>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <article class="prose prose-slate lg:prose-lg dark:prose-invert max-w-none">
+        <!-- Step 1 -->
+        <section id="step-1" class="animate-fadeUp">
+          <h2>Step 1  Create Resource Groups (+ tags)</h2>
+          <div class="not-prose grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+              <h3 class="font-semibold">What it is (RG)</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">
+                A Resource Group is a logical folder for Azure resources; deploy, tag, view costs, and delete as a unit.
+              </p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+              <h3 class="font-semibold">Why it matters</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">
+                AZ-900 loves governance basics: grouping, RBAC scope, and clean teardown.
+              </p>
+            </div>
+          </div>
+          <h4>Clicks</h4>
+          <ul>
+            <li><strong>Portal → Resource groups → Create</strong></li>
+            <li>Subscription: your sub</li>
+            <li>Resource group: <code>rg-az900-app-&lt;slug&gt;</code></li>
+            <li>Region: your region (e.g., East US)</li>
+            <li>Tags: <code>Project = az900-landing</code></li>
+            <li>Review + create → Create</li>
+          </ul>
+          <p class="text-sm opacity-80">
+            Optional: create a second RG now <code>rg-az900-net-&lt;slug&gt;</code> for networking later.
+          </p>
+        </section>
+
+        <!-- Step 2 -->
+        <section id="step-2" class="mt-12 animate-fadeUp">
+          <h2>Step 2  Create an App Service (Web App) on the Free tier</h2>
+          <div class="not-prose grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+              <h3 class="font-semibold">What it is</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">
+                App Service is PaaS for websites/APIs managed runtime, scaling, no VM patching.
+              </p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+              <h3 class="font-semibold">Why it matters</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">
+                Demonstrates PaaS vs IaaS core AZ-900 topic.
+              </p>
+            </div>
+          </div>
+          <h4>Clicks</h4>
+          <ul>
+            <li><strong>Create a resource → Web App → Create</strong></li>
+            <li><em>Basics</em>: Subscription (your sub), Resource Group <code>rg-az900-app-&lt;slug&gt;</code>, Name <code>app-&lt;slug&gt;</code></li>
+            <li>Publish: <strong>Code</strong> · Runtime stack: <strong>.NET 8 / Node 20 / Python 3.11</strong> · OS: <strong>Linux</strong> · Region: same as RG</li>
+            <li>Plan: Create new <code>asp-&lt;slug&gt;</code> → Pricing: <strong>Free (F1)</strong> (if available)</li>
+            <li>Monitoring: App Insights can be Off for now</li>
+            <li>Review + create → Create</li>
+          </ul>
+          <h4>Verify</h4>
+          <p>
+            After deploy: Web App → Overview → click Default domain <code>https://app-&lt;slug&gt;.azurewebsites.net</code> — you should see a splash/runtime page.
+          </p>
+        </section>
+
+        <!-- Step 3 -->
+        <section id="step-3" class="mt-12 animate-fadeUp">
+          <h2>Step 3  Put simple content on it</h2>
+          <p><em>Why:</em> Proves deployment basics; AZ-900 expects you understand content paths.</p>
+          <div class="not-prose grid sm:grid-cols-2 gap-4">
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+              <h3 class="font-semibold">Option A  External Git</h3>
+              <p class="text-sm">Web App → <strong>Deployment Center</strong> → External Git → point to a tiny public repo.</p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+              <h3 class="font-semibold">Option B  ZIP deploy</h3>
+              <p class="text-sm">Web App → <strong>Deployment Center</strong> → ZIP deploy → upload a zip with
+                <code>index.html</code> (“Hello from Azure App Service”).</p>
+            </div>
+          </div>
+          <p class="mt-2">Refresh your site URL to see content live.</p>
+        </section>
+
+        <!-- Step 4 -->
+        <section id="step-4" class="mt-12 animate-fadeUp">
+          <h2>Step 4  (Optional) Add Azure Front Door</h2>
+          <p><em>What:</em> Global edge entry, caching, acceleration; optional WAF. <em>Why:</em> Shows edge & global distribution concepts.</p>
+          <p class="text-sm opacity-80">If you want $0 today, skip and add later.</p>
+          <h4>Clicks</h4>
+          <ul>
+            <li>Create a resource → <strong>Front Door and CDN profiles</strong> → Create</li>
+            <li>RG: <code>rg-az900-app-&lt;slug&gt;</code> · Name: <code>afd-&lt;slug&gt;</code> · SKU: <strong>Standard (Front Door)</strong></li>
+            <li>Endpoint: <code>fd-&lt;slug&gt;</code> → Origin type: <strong>App Service</strong> → select your <code>app-&lt;slug&gt;</code></li>
+            <li>Route: pattern <code>/*</code>, HTTPS redirect On</li>
+          </ul>
+          <p>Open <code>https://fd-&lt;slug&gt;.azurefd.net</code> and confirm the site.</p>
+        </section>
+
+        <!-- Step 5 -->
+        <section id="step-5" class="mt-12 animate-fadeUp">
+          <h2>Step 5  Cost guardrails: Budget + email alerts</h2>
+          <p><em>Why:</em> Cost visibility & governance = AZ-900 gold.</p>
+          <h4>Clicks</h4>
+          <ul>
+            <li>Portal search → <strong>Cost Management + Billing</strong> → Cost Management → <strong>Budgets</strong> → Add</li>
+            <li><strong>Scope</strong>: Subscription (or your RG)</li>
+            <li>Reset period: Monthly · Amount: e.g., $5</li>
+            <li>Filters: Tags → <code>Project = az900-landing</code> (if you tagged RG/resources)</li>
+            <li>Alerts: add your email at 80% and 100% → Create</li>
+          </ul>
+          <h4>Verify</h4>
+          <p>Cost analysis → filter by Tag <code>Project = az900-landing</code> → see current spend (likely $0 on Free tier).</p>
+        </section>
+
+        <!-- Step 6 -->
+        <section id="step-6" class="mt-12 animate-fadeUp">
+          <h2>Step 6  Simple availability alert (HTTP 5xx)</h2>
+          <div class="not-prose grid gap-4 sm:grid-cols-2">
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+              <h3 class="font-semibold">What it is</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">Alerts notify you when metrics/logs breach a threshold.</p>
+            </div>
+            <div class="rounded-xl border border-slate-200 p-4 dark:border-slate-800">
+              <h3 class="font-semibold">Why it matters</h3>
+              <p class="text-sm text-slate-600 dark:text-slate-300">AZ-900 expects basic monitoring vocabulary.</p>
+            </div>
+          </div>
+          <h4>Clicks</h4>
+          <ul>
+            <li><strong>Monitor → Alerts → Create → Alert rule</strong></li>
+            <li><strong>Scope</strong>: select your <em>Web App</em> (App Service)</li>
+            <li><strong>Condition</strong>: Signal type <em>Metrics</em> → Metric <strong>Requests</strong> → <em>Add filter</em> → set <strong>HTTP status code group = 5xx</strong></li>
+            <li>Aggregation: <em>Total</em> · Operator: <em>Greater than</em> · Threshold: <code>5</code></li>
+            <li>Period: <em>5 minutes</em> · Evaluation frequency: <em>1 minute</em></li>
+            <li><strong>Action group</strong>: Create new → add your email (SMS optional)</li>
+            <li>Review + create → Create</li>
+          </ul>
+        </section>
+
+        <!-- Step 7 -->
+        <section id="step-7" class="mt-12 animate-fadeUp">
+          <h2>Step 7  (Optional) Landing-zone “skeleton” network</h2>
+          <p><em>What:</em> VNet with subnets + NSGs to demonstrate segmentation. <em>Why:</em> Speak to subnets/NSGs; later, secure PaaS with Private Endpoints.</p>
+          <h4>Clicks</h4>
+          <ul>
+            <li>Create a resource → <strong>Virtual network</strong> → Create</li>
+            <li>RG: <code>rg-az900-net-&lt;slug&gt;</code> · Address space: <code>10.0.0.0/16</code></li>
+            <li>Subnets: <code>snet-web 10.0.1.0/24</code>, <code>snet-data 10.0.2.0/24</code></li>
+            <li>Create two NSGs and associate one to each subnet; keep inbound locked down by default.</li>
+          </ul>
+        </section>
+
+        <!-- Footer / Lessons -->
+        <section class="mt-14 animate-fadeUp">
+          <h2>Lessons learned</h2>
+          <ul>
+            <li><strong>Tags</strong> make cost analysis painless and professional.</li>
+            <li><strong>App Service</strong> is the quickest PaaS landing for demos & labs.</li>
+            <li>Start on <strong>Free</strong>, then scale or add <strong>Front Door</strong> when needed.</li>
+          </ul>
+          <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">© David nduwa  Mini build hits cost, governance, PaaS, and monitoring in under an hour.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <!-- Tiny scrollspy + reveal -->
+  <script>
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries)=> {
+      entries.forEach(e => e.isIntersecting && e.target.classList.add('opacity-100','translate-y-0'))
+    }, {threshold: 0.08});
+    document.querySelectorAll('.animate-fadeUp').forEach(el=>{
+      el.classList.add('opacity-0','translate-y-2','transition','duration-700');
+      observer.observe(el);
+    });
+
+    // Scrollspy for TOC
+    const links = [...document.querySelectorAll('.toc-link')];
+    const map = Object.fromEntries(links.map(a => [a.getAttribute('href').slice(1), a]));
+    const spy = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          links.forEach(a=>a.classList.remove('text-azure-700','font-semibold'));
+          map[e.target.id]?.classList.add('text-azure-700','font-semibold');
+        }
+      })
+    }, {rootMargin: "-30% 0px -60% 0px", threshold: 0.01});
+    document.querySelectorAll('section[id^="step-"]').forEach(s=>spy.observe(s));
+  </script>
+</body>
+</html>
